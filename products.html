@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlowUp | Product Recommendations</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">GlowUp.</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home (Tips)</a></li>
+                <li><a href="products.html" class="active">Product Finder</a></li>
+            </ul>
+        </nav>
+        <button id="theme-toggle">Toggle Dark Mode</button>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Find Your Routine</h1>
+            <p>Curated product recommendations designed specifically for your skin type.</p>
+        </section>
+
+        <section class="skin-types-section">
+            <h2>Select Your Skin Type</h2>
+            
+            <div class="skin-grid">
+                <div class="skin-card">
+                    <img src="images/normal_skin.jpg" alt="Person with balanced, smooth normal skin" class="skin-img">
+                    <h3>Normal Skin</h3>
+                    <p>Balanced moisture and oil production. Focus on maintenance and radiance.</p>
+                    <ul class="product-list">
+                        <li><strong>Foundation:</strong> Dewy/Satin Finish Liquid Foundation</li>
+                        <li><strong>Primer:</strong> Illuminating Primer</li>
+                        <li><strong>Setting:</strong> Hydrating Setting Spray</li>
+                    </ul>
+                </div>
+
+                <div class="skin-card">
+                    <img src="images/combination_skin.jpg" alt="Model showing T-zone oiliness and dry cheeks" class="skin-img">
+                    <h3>Combination Skin</h3>
+                    <p>Oily in the T-zone (forehead, nose, chin) but normal/dry on the cheeks.</p>
+                    <ul class="product-list">
+                        <li><strong>Foundation:</strong> Natural Matte Fluid Foundation</li>
+                        <li><strong>Primer:</strong> Pore-blurring T-zone Primer</li>
+                        <li><strong>Setting:</strong> Translucent Loose Powder</li>
+                    </ul>
+                </div>
+
+                <div class="skin-card">
+                    <img src="images/oily_skin.jpg" alt="Person with fresh, beautifully mattified skin" class="skin-img">
+                    <h3>Oily Skin</h3>
+                    <p>Excess sebum production leading to shine. Needs mattifying, long-wear options.</p>
+                    <ul class="product-list">
+                        <li><strong>Foundation:</strong> Oil-Free Full Coverage Matte Foundation</li>
+                        <li><strong>Primer:</strong> Mattifying Control Gel Primer</li>
+                        <li><strong>Setting:</strong> Matte Finish Oil-Control Spray</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 GlowUp Beauty Guide. Built for Web Development Project.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
