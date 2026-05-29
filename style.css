@@ -1,206 +1,270 @@
-/* --- Global Reset & Google Fonts --- */
+/* --- Minimalist Global Reset & Custom Typography --- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
 }
 
-/* --- Color Variables --- */
+/* --- Clean Color Variables (Minimalist with Pink & Purple) --- */
 :root {
-    --text-main: #3d2244;
-    --card-bg: #ffffff;
+    --bg-main: #faf6f8;             /* Clean cream-white with a hint of blush */
+    --text-main: #2b1f2d;           /* Deep elegant plum-charcoal instead of harsh black */
+    --text-muted: #7d6b80;          /* Muted purple-gray for subtle text */
+    --header-text: #3d1d43;
     --accent-purple: #9b5de5;
     --accent-pink: #f15bb5;
-    --body-bg: #fff0f6;
+    --card-bg: #ffffff;
+    --card-border: rgba(155, 93, 229, 0.12);
 }
 
 body.dark-theme {
-    --text-main: #fff0f5;
-    --card-bg: #2d1b33;
-    --accent-purple: #f15bb5;
+    --bg-main: #0f0a12;             /* Sleek dark minimalist midnight background */
+    --text-main: #f5eff7;           /* Off-white canvas text */
+    --text-muted: #a692ab;          /* Soft lavender gray */
+    --header-text: #ffffff;
+    --accent-purple: #f15bb5;       /* Inverted accents for readability */
     --accent-pink: #9b5de5;
-    --body-bg: #1a0f21;
+    --card-bg: #160f1b;             /* Crisp dark cards */
+    --card-border: rgba(241, 91, 181, 0.15);
 }
 
 body {
-    background-color: var(--body-bg);
+    background-color: var(--bg-main);
     color: var(--text-main);
     line-height: 1.6;
+    letter-spacing: -0.01em;
 }
 
-/* --- Keyframe Animation for the Moving Gradient Background --- */
-@keyframes fluidGradient {
+/* --- Soft Shifting Gradient Header Animation --- */
+@keyframes minimalistGradient {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
-/* --- Header with Moving Pinkish & Purplish Gradient --- */
 header {
-    background: linear-gradient(-45deg, #ff9a9e, #fecfef, #a18cd1, #fbc2eb);
+    background: linear-gradient(120deg, rgba(255,154,158,0.15), rgba(254,207,239,0.15), rgba(161,140,209,0.15), rgba(251,194,235,0.15));
     background-size: 300% 300%;
-    animation: fluidGradient 8s ease infinite; /* This makes the background move seamlessly! */
+    animation: minimalistGradient 12s ease infinite;
+    backdrop-filter: blur(10px); /* Elegant blurred backdrop look */
+    -webkit-backdrop-filter: blur(10px);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.2rem 5%;
+    padding: 1.5rem 8%;
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 4px 15px rgba(155, 93, 229, 0.2);
+    border-bottom: 1px solid var(--card-border);
 }
 
-/* Calligraphy/Signature style for Logo */
+/* Logo styling using fine calligraphy font */
 .logo {
     font-family: 'Great Vibes', cursive;
-    font-size: 2.8rem;
-    font-weight: bold;
-    color: #4a154b;
+    font-size: 2.2rem;
+    font-weight: 500;
+    color: var(--header-text);
+    letter-spacing: 1px;
 }
 
-/* Clear Horizontal Navigation Bar Layout */
+/* Minimalist Nav Link Items Layout */
 nav ul {
     display: flex;
     list-style: none;
-}
-
-nav ul li {
-    margin: 0 15px;
+    gap: 30px;
 }
 
 nav ul li a {
     text-decoration: none;
-    color: #4a154b;
-    font-weight: 600;
-    font-size: 1.1rem;
+    color: var(--text-muted);
+    font-weight: 400;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase; /* Modern minimalist text styling */
+    padding-bottom: 4px;
+    position: relative;
 }
 
 nav ul li a.active, nav ul li a:hover {
-    color: #ffffff;
-    border-bottom: 2px solid #ffffff;
+    color: var(--text-main);
 }
 
+/* Tiny dot indicator underneath active link for true minimalism */
+nav ul li a.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    background-color: var(--accent-purple);
+    border-radius: 50%;
+}
+
+/* Clean Minimal Button */
 #theme-toggle {
-    background-color: #4a154b;
-    color: white;
-    border: none;
-    padding: 8px 18px;
-    border-radius: 20px;
+    background-color: transparent;
+    color: var(--text-main);
+    border: 1px solid var(--text-main);
+    padding: 6px 16px;
+    border-radius: 4px; /* Crisp minimalist corners instead of large bubbles */
     cursor: pointer;
-    font-weight: bold;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
 }
 
 #theme-toggle:hover {
-    transform: scale(1.05);
-    background-color: var(--accent-purple);
+    background-color: var(--text-main);
+    color: var(--bg-main);
 }
 
 /* --- Hero Showcase Sections --- */
 .hero {
     text-align: center;
-    padding: 3.5rem 1rem 2rem 1rem;
+    padding: 5rem 1rem 3rem 1rem;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-/* Calligraphy Styling for Main Headers */
+/* Clean Calligraphy Headings */
 .hero h1 {
     font-family: 'Great Vibes', cursive;
-    font-size: 4.8rem;
-    color: #4a154b;
-    margin-bottom: 5px;
+    font-size: 4rem;
+    color: var(--header-text);
+    margin-bottom: 8px;
+    font-weight: 400;
 }
 
-body.dark-theme .hero h1 {
-    color: #fbc2eb;
-}
-
-/* Signature Styling for Subtitles */
+/* Signature Accent Subtitle */
 .subtitle {
     font-family: 'Mrs Saint Delafield', cursive;
-    font-size: 2.8rem;
+    font-size: 2.5rem;
     color: var(--accent-pink);
-    margin-top: -15px;
+    margin-top: -10px;
+    opacity: 0.85;
 }
 
-/* --- Grid Systems (Flexbox / Grid Criteria Requirement) --- */
+/* --- Clean Grid System (Fulfills CSS Grid Rubric) --- */
 .tips-container, .skin-types-section {
-    padding: 1rem 5% 4rem 5%;
+    padding: 2rem 8% 6rem 8%;
 }
 
 .tips-grid, .skin-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px; /* Spacious separation gap */
 }
 
-/* --- Card Designs & Interactive Hover Effects --- */
+/* --- Premium Flat Card Layouts & Micro-Animations --- */
 .tip-card, .skin-card {
     background-color: var(--card-bg);
-    padding: 25px;
-    border-radius: 16px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(241, 91, 181, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 35px;
+    border-radius: 8px; /* Clean sharp minimalist roundings */
+    border: 1px solid var(--card-border);
+    position: relative;
+    overflow: hidden;
 }
 
-/* Smooth Interactive Hover Effect */
+/* Sophisticated, subtle lift up micro-hover effect */
 .tip-card:hover, .skin-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 24px rgba(241, 91, 181, 0.3);
+    transform: translateY(-4px);
+    border-color: var(--accent-purple);
 }
 
+/* Sleek numbers / headers */
 .tip-card h3, .skin-card h3 {
-    font-size: 1.4rem;
+    font-size: 1.25rem;
+    font-weight: 600;
     margin-bottom: 12px;
-    color: #4a154b;
+    color: var(--text-main);
+    letter-spacing: -0.02em;
 }
 
-body.dark-theme .tip-card h3, body.dark-theme .skin-card h3 {
-    color: #fbc2eb;
+.tip-card p, .skin-desc {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.7;
 }
 
-/* --- Recommendation Specific Layout Elements --- */
+/* --- Minimalist Products Layout Assets --- */
 .skin-img {
     width: 100%;
-    height: 200px;
+    height: 220px;
     object-fit: cover;
-    border-radius: 12px;
-    margin-bottom: 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    filter: grayscale(15%); /* Mutes colors slightly for that luxury editorial look */
+}
+
+.skin-card:hover .skin-img {
+    filter: grayscale(0%);
 }
 
 .product-list {
-    margin: 15px 0 20px 20px;
+    margin: 20px 0 30px 20px;
+    color: var(--text-muted);
+    font-size: 0.95rem;
 }
 
 .product-list li {
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
-/* --- Amazon Button --- */
+.product-list strong {
+    color: var(--text-main);
+    font-weight: 500;
+}
+
+/* --- Sleek Premium Retail Button --- */
 .amazon-btn {
     display: block;
     text-align: center;
-    background: linear-gradient(135deg, #ff9900, #ffb300);
-    color: #ffffff;
+    background-color: transparent;
+    color: var(--text-main);
     text-decoration: none;
-    font-weight: bold;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
     padding: 12px;
-    border-radius: 25px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    transition: transform 0.2s ease;
+    border-radius: 4px;
+    border: 1px solid var(--text-main);
 }
 
 .amazon-btn:hover {
-    transform: scale(1.03);
-    background: linear-gradient(135deg, #e68a00, #ff9900);
+    background-color: var(--text-main);
+    color: var(--bg-main);
 }
 
 /* --- Footer Area --- */
 footer {
     text-align: center;
-    padding: 2rem;
-    background-color: rgba(74, 21, 75, 0.04);
-    margin-top: 3rem;
-    font-size: 0.9rem;
+    padding: 3rem;
+    border-top: 1px solid var(--card-border);
+    margin-top: 4rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+}
+
+/* --- Full Mobile Responsiveness Logic --- */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 1.5rem 2%;
+    }
+    nav ul {
+        gap: 15px;
+    }
+    .hero h1 {
+        font-size: 3rem;
+    }
+    .subtitle {
+        font-size: 2rem;
+    }
 }
