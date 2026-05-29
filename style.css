@@ -9,9 +9,9 @@
 
 /* --- Clean Color Variables (Minimalist with Pink & Purple) --- */
 :root {
-    --bg-main: #faf6f8;             /* Clean cream-white with a hint of blush */
-    --text-main: #2b1f2d;           /* Deep elegant plum-charcoal instead of harsh black */
-    --text-muted: #7d6b80;          /* Muted purple-gray for subtle text */
+    --bg-main: #faf6f8;             /* Malinis na kulay blush/cream */
+    --text-main: #2b1f2d;           /* Elegant plum-charcoal para hindi masyadong matigas na itim */
+    --text-muted: #7d6b80;          /* Muted purple-gray */
     --header-text: #3d1d43;
     --accent-purple: #9b5de5;
     --accent-pink: #f15bb5;
@@ -20,13 +20,13 @@
 }
 
 body.dark-theme {
-    --bg-main: #0f0a12;             /* Sleek dark minimalist midnight background */
-    --text-main: #f5eff7;           /* Off-white canvas text */
+    --bg-main: #0f0a12;             /* Dark minimalist background */
+    --text-main: #f5eff7;           /* Off-white text */
     --text-muted: #a692ab;          /* Soft lavender gray */
     --header-text: #ffffff;
-    --accent-purple: #f15bb5;       /* Inverted accents for readability */
+    --accent-purple: #f15bb5;       
     --accent-pink: #9b5de5;
-    --card-bg: #160f1b;             /* Crisp dark cards */
+    --card-bg: #160f1b;             
     --card-border: rgba(241, 91, 181, 0.15);
 }
 
@@ -34,22 +34,21 @@ body {
     background-color: var(--bg-main);
     color: var(--text-main);
     line-height: 1.6;
-    letter-spacing: -0.01em;
 }
 
-/* --- Soft Shifting Gradient Header Animation --- */
-@keyframes minimalistGradient {
+/* --- 🌟 ETO NA YUNG GUMAGALAW NA GRADIENT EFFECT ANIMATION 🌟 --- */
+@keyframes fluidGradient {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
 header {
-    background: linear-gradient(120deg, rgba(255,154,158,0.15), rgba(254,207,239,0.15), rgba(161,140,209,0.15), rgba(251,194,235,0.15));
+    /* Maganda at hindi masakit sa matang gumagalaw na pinkish & purplish pastel gradient */
+    background: linear-gradient(-45deg, #ff9a9e, #fecfef, #a18cd1, #fbc2eb);
     background-size: 300% 300%;
-    animation: minimalistGradient 12s ease infinite;
-    backdrop-filter: blur(10px); /* Elegant blurred backdrop look */
-    -webkit-backdrop-filter: blur(10px);
+    animation: fluidGradient 8s ease infinite; /* Eto yung nagpapagalaw sa kaniya pre! */
+    
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -58,18 +57,18 @@ header {
     top: 0;
     z-index: 100;
     border-bottom: 1px solid var(--card-border);
+    box-shadow: 0 4px 15px rgba(155, 93, 229, 0.1);
 }
 
-/* Logo styling using fine calligraphy font */
+/* Logo gamit ang pinong calligraphy font */
 .logo {
     font-family: 'Great Vibes', cursive;
-    font-size: 2.2rem;
-    font-weight: 500;
-    color: var(--header-text);
-    letter-spacing: 1px;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #4a154b;
 }
 
-/* Minimalist Nav Link Items Layout */
+/* Horizontal Navigation Bar Layout */
 nav ul {
     display: flex;
     list-style: none;
@@ -78,48 +77,46 @@ nav ul {
 
 nav ul li a {
     text-decoration: none;
-    color: var(--text-muted);
-    font-weight: 400;
-    font-size: 0.95rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase; /* Modern minimalist text styling */
+    color: #4a154b; /* Bagay sa kulay ng gradient */
+    font-weight: 600;
+    font-size: 1rem;
+    text-transform: uppercase;
     padding-bottom: 4px;
     position: relative;
 }
 
 nav ul li a.active, nav ul li a:hover {
-    color: var(--text-main);
+    color: #ffffff; /* Puti kapag naka-hover para kitang-kita sa gradient */
 }
 
-/* Tiny dot indicator underneath active link for true minimalism */
+/* Minimalist dot indicator sa ilalim ng active page link */
 nav ul li a.active::after {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: -2px;
     left: 50%;
     transform: translateX(-50%);
-    width: 4px;
-    height: 4px;
-    background-color: var(--accent-purple);
+    width: 6px;
+    height: 6px;
+    background-color: #ffffff;
     border-radius: 50%;
 }
 
-/* Clean Minimal Button */
+/* Clean Minimalist Theme Toggle Button */
 #theme-toggle {
-    background-color: transparent;
-    color: var(--text-main);
-    border: 1px solid var(--text-main);
-    padding: 6px 16px;
-    border-radius: 4px; /* Crisp minimalist corners instead of large bubbles */
+    background-color: #4a154b;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px; 
     cursor: pointer;
     font-size: 0.85rem;
-    font-weight: 500;
-    letter-spacing: 0.03em;
+    font-weight: 600;
 }
 
 #theme-toggle:hover {
-    background-color: var(--text-main);
-    color: var(--bg-main);
+    background-color: var(--accent-purple);
+    transform: scale(1.05);
 }
 
 /* --- Hero Showcase Sections --- */
@@ -130,10 +127,10 @@ nav ul li a.active::after {
     margin: 0 auto;
 }
 
-/* Clean Calligraphy Headings */
+/* Calligraphy Headings */
 .hero h1 {
     font-family: 'Great Vibes', cursive;
-    font-size: 4rem;
+    font-size: 4.5rem;
     color: var(--header-text);
     margin-bottom: 8px;
     font-weight: 400;
@@ -142,62 +139,59 @@ nav ul li a.active::after {
 /* Signature Accent Subtitle */
 .subtitle {
     font-family: 'Mrs Saint Delafield', cursive;
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     color: var(--accent-pink);
     margin-top: -10px;
-    opacity: 0.85;
 }
 
-/* --- Clean Grid System (Fulfills CSS Grid Rubric) --- */
+/* --- Grid Systems --- */
 .tips-container, .skin-types-section {
-    padding: 2rem 8% 6rem 8%;
+    padding: 1rem 8% 6rem 8%;
 }
 
 .tips-grid, .skin-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px; /* Spacious separation gap */
+    gap: 30px; 
 }
 
-/* --- Premium Flat Card Layouts & Micro-Animations --- */
+/* --- Clean Flat Card Layouts & Micro-Animations --- */
 .tip-card, .skin-card {
     background-color: var(--card-bg);
     padding: 35px;
-    border-radius: 8px; /* Clean sharp minimalist roundings */
+    border-radius: 8px; 
     border: 1px solid var(--card-border);
     position: relative;
     overflow: hidden;
 }
 
-/* Sophisticated, subtle lift up micro-hover effect */
+/* Subtle lift up card micro-hover animation */
 .tip-card:hover, .skin-card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-5px);
     border-color: var(--accent-purple);
+    box-shadow: 0 10px 25px rgba(155, 93, 229, 0.1);
 }
 
-/* Sleek numbers / headers */
 .tip-card h3, .skin-card h3 {
-    font-size: 1.25rem;
+    font-size: 1.3rem;
     font-weight: 600;
     margin-bottom: 12px;
     color: var(--text-main);
-    letter-spacing: -0.02em;
 }
 
 .tip-card p, .skin-desc {
     font-size: 0.95rem;
     color: var(--text-muted);
-    line-height: 1.7;
 }
 
-/* --- Minimalist Products Layout Assets --- */
+/* --- Minimalist Products Page Elements --- */
 .skin-img {
     width: 100%;
     height: 220px;
     object-fit: cover;
     border-radius: 4px;
     margin-bottom: 20px;
-    filter: grayscale(15%); /* Mutes colors slightly for that luxury editorial look */
+    filter: grayscale(10%); 
 }
 
 .skin-card:hover .skin-img {
@@ -219,7 +213,7 @@ nav ul li a.active::after {
     font-weight: 500;
 }
 
-/* --- Sleek Premium Retail Button --- */
+/* --- Amazon Order Button --- */
 .amazon-btn {
     display: block;
     text-align: center;
@@ -248,7 +242,6 @@ footer {
     margin-top: 4rem;
     font-size: 0.85rem;
     color: var(--text-muted);
-    letter-spacing: 0.02em;
 }
 
 /* --- Full Mobile Responsiveness Logic --- */
