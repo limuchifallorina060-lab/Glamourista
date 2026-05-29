@@ -4,25 +4,34 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
-    transition: background-color 0.4s ease, color 0.4s ease;
+    transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
 }
 
-/* --- Color Variables --- */
+/* --- Color Variables (Dynamic Contrast Fix) --- */
 :root {
-    --text-main: #2b1f2d;           /* Elegant deep plum */
-    --text-muted: #5e4f61;          /* Readable darker lavender-gray */
-    --card-bg: rgba(255, 255, 255, 0.75); /* Semi-transparent para kita ang gradient sa ilalim */
-    --card-border: rgba(155, 93, 229, 0.2);
+    /* Light Mode Settings */
+    --text-main: #2b1f2d;           
+    --text-muted: #4a3b4e;          
+    --hero-title: #3d1d43;          /* Madilim na lilang-plum para kitang-kita sa light gradient */
+    --hero-subtitle: #db2777;       /* Matingkad na pink para buhay na buhay */
+    --card-bg: rgba(255, 255, 255, 0.82); 
+    --card-border: rgba(155, 93, 229, 0.15);
+    --gradient-overlay: rgba(255, 255, 255, 0); /* Walang takip sa light mode */
 }
 
 body.dark-theme {
+    /* Dark Mode Settings - Dito natin aayusin yung hindi nakikitang text! */
     --text-main: #ffffff;           
     --text-muted: #e0d5e3;          
-    --card-bg: rgba(26, 15, 33, 0.85); 
+    --hero-title: #ffffff;          /* Puting-puti para lumitaw sa madilim na background */
+    --hero-subtitle: #fbc2eb;       /* Maliwanag na pastel pink/purple para sa dark theme */
+    --card-bg: rgba(22, 15, 27, 0.88); 
     --card-border: rgba(241, 91, 181, 0.3);
+    /* Naglalagay ng madilim na layer sa ibabaw ng gradient para luminaw ang puting text */
+    --gradient-overlay: rgba(0, 0, 0, 0.5); 
 }
 
-/* --- 🌟 GUMAGALAW NA VIBRANT GRADIENT ANIMATION 🌟 --- */
+/* --- 🌟 FLUID BACKROUND GRADIENT WITH DARK OVERLAY CONTROLLER 🌟 --- */
 @keyframes fluidBackground {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
@@ -32,19 +41,35 @@ body.dark-theme {
 body {
     color: var(--text-main);
     line-height: 1.6;
+    position: relative;
+    min-height: 100vh;
     
-    /* 🌟 Ginawa nating mas matingkad ang mga kulay para kitang-kita na! */
+    /* Vibrant, rich gradient background */
     background: linear-gradient(-45deg, #ff9a9e, #fecfef, #c3b1e1, #fbc2eb, #a18cd1);
     background-size: 400% 400%;
-    animation: fluidBackground 12s ease infinite; /* Ito ang nagpapagalaw sa buong page! */
-    background-attachment: fixed; /* Nananatili ang gradient habang nag-sc-scroll */
+    animation: fluidBackground 12s ease infinite;
+    background-attachment: fixed;
 }
 
-/* --- Navigation Header --- */
+/* Ang mahiwagang overlay na nag-o-on lang tuwing dark mode para readable ang text! */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--gradient-overlay);
+    z-index: -1; /* Mananatili sa likod ng mga cards at text */
+    pointer-events: none;
+    transition: background-color 0.4s ease;
+}
+
+/* --- Navigation Header Area --- */
 header {
-    background: rgba(255, 255, 255, 0.3); /* Glassmorphism look */
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -52,18 +77,21 @@ header {
     position: sticky;
     top: 0;
     z-index: 100;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
 }
 
-/* Calligraphy style strictly for the short Logo */
+body.dark-theme header {
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 .logo {
     font-family: 'Great Vibes', cursive;
     font-size: 2.6rem;
     font-weight: bold;
-    color: #4a154b;
+    color: var(--hero-title);
 }
 
-/* Horizontal Layout */
 nav ul {
     display: flex;
     list-style: none;
@@ -72,7 +100,7 @@ nav ul {
 
 nav ul li a {
     text-decoration: none;
-    color: #4a154b;
+    color: var(--hero-title);
     font-weight: 600;
     font-size: 0.95rem;
     text-transform: uppercase;
@@ -82,7 +110,7 @@ nav ul li a {
 }
 
 nav ul li a.active, nav ul li a:hover {
-    color: #ffffff;
+    color: var(--hero-subtitle);
 }
 
 nav ul li a.active::after {
@@ -93,14 +121,14 @@ nav ul li a.active::after {
     transform: translateX(-50%);
     width: 6px;
     height: 6px;
-    background-color: #ffffff;
+    background-color: var(--hero-subtitle);
     border-radius: 50%;
 }
 
 #theme-toggle {
-    background-color: #4a154b;
-    color: white;
-    border: none;
+    background-color: var(--hero-title);
+    color: var(--card-bg);
+    border: 1px solid var(--hero-title);
     padding: 8px 16px;
     border-radius: 4px;
     cursor: pointer;
@@ -109,12 +137,11 @@ nav ul li a.active::after {
 }
 
 #theme-toggle:hover {
-    background-color: #ffffff;
-    color: #4a154b;
-    transform: scale(1.05);
+    background-color: transparent;
+    color: var(--hero-title);
 }
 
-/* --- Hero Section & Typography Fixes --- */
+/* --- Hero Section Text Custom Changes --- */
 .hero {
     text-align: center;
     padding: 6rem 1rem 3rem 1rem;
@@ -122,35 +149,26 @@ nav ul li a.active::after {
     margin: 0 auto;
 }
 
-/* 🌟 MINIMALIST FONT FIX: Tinanggal ang cursive dito para malinis at madaling basahin! */
+/* 🌟 DYNAMIC TEXT COLOR FIX: Gagamit ng automatic contrasting variables! */
 .hero h1 {
     font-family: 'Montserrat', sans-serif;
     font-size: 3.5rem;
     font-weight: 600;
-    color: #3d1d43;
+    color: var(--hero-title); /* Nagbabago depende sa theme! */
     letter-spacing: -0.03em;
     margin-bottom: 15px;
-    text-transform: none;
 }
 
-body.dark-theme .hero h1 {
-    color: #ffffff;
-}
-
-/* 🌟 ACCENT SIGNATURE: Ginawang manipis na sub-text para classy tingnan */
+/* 🌟 CURSIVE FIX: Malinaw na contrast para sa signature sub-text niyo pre */
 .subtitle {
     font-family: 'Mrs Saint Delafield', cursive;
-    font-size: 2.8rem;
-    color: #f15bb5;
+    font-size: 3rem;
+    color: var(--hero-subtitle); /* Puting pastel sa dark mode, matingkad sa light mode! */
     margin-top: -5px;
     letter-spacing: 1px;
 }
 
-body.dark-theme .subtitle {
-    color: #fbc2eb;
-}
-
-/* --- Grid Systems Layout (Fulfills FEPS Criteria 2.2) --- */
+/* --- Responsive Layout Columns Systems --- */
 .tips-container, .skin-types-section {
     padding: 1rem 8% 6rem 8%;
 }
@@ -161,33 +179,28 @@ body.dark-theme .subtitle {
     gap: 30px;
 }
 
-/* --- Translucent Glass-Like Card Designs --- */
+/* --- Smooth Translucent Card Components --- */
 .tip-card, .skin-card {
     background-color: var(--card-bg);
     padding: 35px;
     border-radius: 12px;
     border: 1px solid var(--card-border);
-    backdrop-filter: blur(5px); /* Pinapaganda ang translucent effect */
-    -webkit-backdrop-filter: blur(5px);
-    box-shadow: 0 8px 32px rgba(155, 93, 229, 0.08);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
 }
 
-/* Hover Interactivity (Fulfills FEPS Criteria 2.3) */
 .tip-card:hover, .skin-card:hover {
     transform: translateY(-5px);
-    border-color: #9b5de5;
-    box-shadow: 0 12px 24px rgba(155, 93, 229, 0.2);
+    border-color: var(--hero-subtitle);
+    box-shadow: 0 12px 24px rgba(155, 93, 229, 0.15);
 }
 
 .tip-card h3, .skin-card h3 {
     font-size: 1.25rem;
     font-weight: 600;
     margin-bottom: 12px;
-    color: #3d1d43;
-}
-
-body.dark-theme .tip-card h3, body.dark-theme .skin-card h3 {
-    color: #fbc2eb;
+    color: var(--hero-title);
 }
 
 .tip-card p, .skin-desc {
@@ -196,7 +209,7 @@ body.dark-theme .tip-card h3, body.dark-theme .skin-card h3 {
     font-weight: 500;
 }
 
-/* --- Recommendation Specific Layout Elements --- */
+/* --- Product Image Display Adjustments --- */
 .skin-img {
     width: 100%;
     height: 220px;
@@ -219,12 +232,12 @@ body.dark-theme .tip-card h3, body.dark-theme .skin-card h3 {
     color: var(--text-main);
 }
 
-/* --- Amazon Custom Button --- */
+/* --- Amazon Custom Action Button --- */
 .amazon-btn {
     display: block;
     text-align: center;
-    background-color: #4a154b;
-    color: #ffffff;
+    background-color: var(--hero-title);
+    color: var(--card-bg);
     text-decoration: none;
     font-size: 0.85rem;
     font-weight: 600;
@@ -232,21 +245,38 @@ body.dark-theme .tip-card h3, body.dark-theme .skin-card h3 {
     text-transform: uppercase;
     padding: 12px;
     border-radius: 6px;
-    transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .amazon-btn:hover {
-    background-color: #9b5de5;
-    transform: scale(1.02);
+    background-color: var(--hero-subtitle);
+    color: #ffffff;
 }
 
-/* --- Footer Area --- */
+/* --- Footer --- */
 footer {
     text-align: center;
     padding: 3rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
     margin-top: 4rem;
     font-size: 0.85rem;
-    color: #4a154b;
+    color: var(--hero-title);
     font-weight: 500;
+}
+
+/* --- Responsiveness System --- */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 1.5rem 2%;
+    }
+    nav ul {
+        gap: 15px;
+    }
+    .hero h1 {
+        font-size: 2.8rem;
+    }
+    .subtitle {
+        font-size: 2.2rem;
+    }
 }
