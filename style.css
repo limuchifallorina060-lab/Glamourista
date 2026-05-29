@@ -1,23 +1,206 @@
-document.addEventListener("DOMContentLoaded", () => {
-    
-    const themeToggleBtn = document.getElementById("theme-toggle");
-    
-    if (localStorage.getItem("theme") === "dark") {
-        document.body.classList.add("dark-theme");
-        themeToggleBtn.textContent = "Toggle Light Mode";
-    }
+/* --- Global Reset & Google Fonts --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
 
-    themeToggleBtn.addEventListener("click", () => {
-        document.body.classList.toggle("dark-theme");
-        
-        if (document.body.classList.contains("dark-theme")) {
-            localStorage.setItem("theme", "dark");
-            themeToggleBtn.textContent = "Toggle Light Mode";
-        } else {
-            localStorage.setItem("theme", "light");
-            themeToggleBtn.textContent = "Toggle Dark Mode";
-        }
-    });
+/* --- Color Variables --- */
+:root {
+    --text-main: #3d2244;
+    --card-bg: #ffffff;
+    --accent-purple: #9b5de5;
+    --accent-pink: #f15bb5;
+    --body-bg: #fff0f6;
+}
 
-    console.log("GlowUp script loaded successfully without errors.");
-});
+body.dark-theme {
+    --text-main: #fff0f5;
+    --card-bg: #2d1b33;
+    --accent-purple: #f15bb5;
+    --accent-pink: #9b5de5;
+    --body-bg: #1a0f21;
+}
+
+body {
+    background-color: var(--body-bg);
+    color: var(--text-main);
+    line-height: 1.6;
+}
+
+/* --- Keyframe Animation for the Moving Gradient Background --- */
+@keyframes fluidGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* --- Header with Moving Pinkish & Purplish Gradient --- */
+header {
+    background: linear-gradient(-45deg, #ff9a9e, #fecfef, #a18cd1, #fbc2eb);
+    background-size: 300% 300%;
+    animation: fluidGradient 8s ease infinite; /* This makes the background move seamlessly! */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 5%;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 15px rgba(155, 93, 229, 0.2);
+}
+
+/* Calligraphy/Signature style for Logo */
+.logo {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.8rem;
+    font-weight: bold;
+    color: #4a154b;
+}
+
+/* Clear Horizontal Navigation Bar Layout */
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #4a154b;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+nav ul li a.active, nav ul li a:hover {
+    color: #ffffff;
+    border-bottom: 2px solid #ffffff;
+}
+
+#theme-toggle {
+    background-color: #4a154b;
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#theme-toggle:hover {
+    transform: scale(1.05);
+    background-color: var(--accent-purple);
+}
+
+/* --- Hero Showcase Sections --- */
+.hero {
+    text-align: center;
+    padding: 3.5rem 1rem 2rem 1rem;
+}
+
+/* Calligraphy Styling for Main Headers */
+.hero h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 4.8rem;
+    color: #4a154b;
+    margin-bottom: 5px;
+}
+
+body.dark-theme .hero h1 {
+    color: #fbc2eb;
+}
+
+/* Signature Styling for Subtitles */
+.subtitle {
+    font-family: 'Mrs Saint Delafield', cursive;
+    font-size: 2.8rem;
+    color: var(--accent-pink);
+    margin-top: -15px;
+}
+
+/* --- Grid Systems (Flexbox / Grid Criteria Requirement) --- */
+.tips-container, .skin-types-section {
+    padding: 1rem 5% 4rem 5%;
+}
+
+.tips-grid, .skin-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+/* --- Card Designs & Interactive Hover Effects --- */
+.tip-card, .skin-card {
+    background-color: var(--card-bg);
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(241, 91, 181, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Smooth Interactive Hover Effect */
+.tip-card:hover, .skin-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(241, 91, 181, 0.3);
+}
+
+.tip-card h3, .skin-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+    color: #4a154b;
+}
+
+body.dark-theme .tip-card h3, body.dark-theme .skin-card h3 {
+    color: #fbc2eb;
+}
+
+/* --- Recommendation Specific Layout Elements --- */
+.skin-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+
+.product-list {
+    margin: 15px 0 20px 20px;
+}
+
+.product-list li {
+    margin-bottom: 8px;
+}
+
+/* --- Amazon Button --- */
+.amazon-btn {
+    display: block;
+    text-align: center;
+    background: linear-gradient(135deg, #ff9900, #ffb300);
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 12px;
+    border-radius: 25px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+}
+
+.amazon-btn:hover {
+    transform: scale(1.03);
+    background: linear-gradient(135deg, #e68a00, #ff9900);
+}
+
+/* --- Footer Area --- */
+footer {
+    text-align: center;
+    padding: 2rem;
+    background-color: rgba(74, 21, 75, 0.04);
+    margin-top: 3rem;
+    font-size: 0.9rem;
+}
