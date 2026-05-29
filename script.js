@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
     
     if (localStorage.getItem("theme") === "dark") {
         document.body.classList.add("dark-theme");
-        themeToggleBtn.textContent = "Toggle Light Mode";
     }
 
     themeToggleBtn.addEventListener("click", () => {
@@ -11,12 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
         
         if (document.body.classList.contains("dark-theme")) {
             localStorage.setItem("theme", "dark");
-            themeToggleBtn.textContent = "Toggle Light Mode";
         } else {
             localStorage.setItem("theme", "light");
-            themeToggleBtn.textContent = "Toggle Dark Mode";
         }
     });
-
-    console.log("GlowUp system initialized without any console errors.");
 });
